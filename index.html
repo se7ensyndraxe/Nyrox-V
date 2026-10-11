@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nyrox V | Sunucu Rehberi</title>
+<title>Nyrox V | Sunucu tanıtım rehberi.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -43,6 +43,42 @@
     overflow-x:hidden;
     position:relative;
   }
+  body:not(.experience-started){height:100vh;overflow:hidden;}
+  body>:not(.welcome-screen){
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(12px);
+    transition:opacity .65s ease,transform .65s cubic-bezier(.16,1,.3,1),visibility .65s;
+  }
+  body.experience-started>:not(.welcome-screen){
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+  }
+  .welcome-screen{
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    padding:48px 24px max(52px,env(safe-area-inset-bottom));
+    background-image:linear-gradient(180deg,rgba(13,7,20,.06) 35%,rgba(15,8,25,.32) 65%,rgba(15,8,25,.82) 100%),url('https://i.ibb.co/mVTSpn2p/Gemini-Generated-mage-93zb3m93zb3m93zb.jpg');
+    background-size:cover;
+    background-position:center;
+    transition:opacity .75s ease,transform .9s cubic-bezier(.16,1,.3,1),visibility .75s;
+  }
+  .welcome-screen.leaving{opacity:0;visibility:hidden;transform:scale(1.04);pointer-events:none;}
+  .welcome-continue{
+    min-width:200px;min-height:58px;padding:15px 38px;border:1px solid rgba(235,195,255,.38);border-radius:18px;
+    color:#fff;background:linear-gradient(145deg,#9c58c4,#612b87);font:600 1.05rem 'Oswald',sans-serif;
+    text-transform:uppercase;letter-spacing:.08em;cursor:pointer;
+    box-shadow:10px 12px 24px rgba(12,3,23,.48),-6px -6px 16px rgba(233,198,255,.2),inset 1px 1px 2px rgba(255,255,255,.34),inset -3px -4px 8px rgba(40,7,58,.35);
+    transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+  }
+  .welcome-continue:hover{transform:translateY(-3px);filter:brightness(1.1);box-shadow:12px 16px 28px rgba(12,3,23,.5),-6px -6px 18px rgba(233,198,255,.25),inset 1px 1px 2px rgba(255,255,255,.38);}
+  .welcome-continue:active{transform:translateY(1px);box-shadow:inset 4px 5px 10px rgba(35,7,52,.46),inset -2px -2px 5px rgba(233,198,255,.16);}
+  .welcome-continue:focus-visible{outline:2px solid #f0c8ff;outline-offset:4px;}
   body::before{
     content:'';
     position:fixed;inset:0;
@@ -879,6 +915,10 @@
 </head>
 <body>
 
+<div class="welcome-screen" id="welcomeScreen">
+  <button class="welcome-continue" id="welcomeContinue" type="button">Devam et</button>
+</div>
+
 <div class="bg-blobs" aria-hidden="true">
   <div class="blob blob-red"></div>
   <div class="blob blob-orange"></div>
@@ -998,7 +1038,7 @@
     <div class="info-band">
       <div class="info-cell"><span class="num">Hard</span><span class="lbl">RP Seviyesi</span></div>
       <div class="info-cell"><span class="num">60+</span><span class="lbl">FPS Optimizasyon</span></div>
-      <div class="info-cell"><span class="num">S1</span><span class="lbl">Sosyal / Legal / İllegal</span></div>
+      <div class="info-cell"><span class="num">BETA</span><span class="lbl">Sosyal / Legal / İllegal</span></div>
     </div>
 
     <div class="discord-block">
@@ -1457,6 +1497,7 @@
   let ytReady = false;
   let isPlaying = false;
   let isMuted = true;
+  let startRequested = false;
   const tracks = [
     { id: '8WCGNMn85Bw', title: 'SABI & MIABOYKA - Bare minimum (sped up)' },
     { id: 'HvkB0-1_epM', title: 'SÖZDE KİMSELER SEVMİYOR - UZI X LVBEL C5 REMIX ( Prod. Luminara )' },
@@ -1477,6 +1518,23 @@
   const trackButtons = document.querySelectorAll('.track-item');
   const playlistToggle = document.getElementById('playlistToggle');
   const musicExternal = document.getElementById('musicExternal');
+  const welcomeScreen = document.getElementById('welcomeScreen');
+  const welcomeContinue = document.getElementById('welcomeContinue');
+
+  function startExperience(){
+    document.body.classList.add('experience-started');
+    welcomeScreen.classList.add('leaving');
+    window.setTimeout(function(){ welcomeScreen.remove(); }, 900);
+    startRequested = true;
+    if(ytReady){
+      ytPlayer.unMute();
+      ytPlayer.setVolume(Number(volSlider.value) || 35);
+      ytPlayer.playVideo();
+      isMuted = false;
+      startRequested = false;
+    }
+  }
+  welcomeContinue.addEventListener('click', startExperience, { once:true });
 
   playlistToggle.addEventListener('click', function(){
     const expanded = playlistToggle.getAttribute('aria-expanded') === 'true';
@@ -1493,7 +1551,8 @@
     });
     if(!ytReady) return;
     if(autoplay){
-      if(isMuted){ ytPlayer.unMute(); isMuted = false; }
+      ytPlayer.unMute();
+      isMuted = false;
       ytPlayer.loadVideoById(tracks[currentTrack].id);
     } else {
       ytPlayer.cueVideoById(tracks[currentTrack].id);
@@ -1514,7 +1573,7 @@
       width: '200',
       videoId: tracks[currentTrack].id,
       playerVars: {
-        autoplay: 1,
+        autoplay: 0,
         mute: 1,
         controls: 0,
         loop: 1,
@@ -1525,11 +1584,17 @@
           ytReady = true;
           e.target.setVolume(Number(volSlider.value) || 35);
           e.target.mute();
-          e.target.playVideo();
+          if(startRequested){
+            e.target.unMute();
+            e.target.playVideo();
+            isMuted = false;
+            startRequested = false;
+          }
         },
         onStateChange: function(e){
           if(e.data === YT.PlayerState.PLAYING) setPlayUI(true);
           else if(e.data === YT.PlayerState.PAUSED) setPlayUI(false);
+          else if(e.data === YT.PlayerState.ENDED) selectTrack(currentTrack + 1, true);
         },
         onError: function(){
           setPlayUI(false);
@@ -1537,18 +1602,6 @@
       }
     });
   }
-
-  function unmuteOnFirstInteraction(){
-    if(!ytReady || !isMuted) return;
-    ytPlayer.unMute();
-    isMuted = false;
-    ['click','touchstart','keydown','scroll'].forEach(function(evt){
-      window.removeEventListener(evt, unmuteOnFirstInteraction);
-    });
-  }
-  ['click','touchstart','keydown','scroll'].forEach(function(evt){
-    window.addEventListener(evt, unmuteOnFirstInteraction, { passive:true });
-  });
 
   musicToggle.addEventListener('click', function(){
     if(!ytReady) return;
