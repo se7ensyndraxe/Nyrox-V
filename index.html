@@ -581,63 +581,6 @@
   }
   .section-head p{color:var(--text-dim); max-width:600px; margin:0 auto; line-height:1.7;}
 
-  .management-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
-    gap:16px;
-  }
-  .management-card{
-    padding:20px;
-    border:1px solid var(--glass-border);
-    border-radius:14px;
-    background:linear-gradient(145deg,rgba(53,38,67,.78),rgba(25,17,38,.88));
-    backdrop-filter:blur(14px) saturate(140%);
-    -webkit-backdrop-filter:blur(14px) saturate(140%);
-    box-shadow:0 8px 28px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.05);
-    transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
-  }
-  .management-card:hover{transform:translateY(-3px);border-color:var(--glass-red-border);box-shadow:0 12px 32px rgba(0,0,0,.32),0 0 20px var(--blood-glow);}
-  .management-profile-head{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
-  .management-avatar{
-    display:grid;place-items:center;flex:0 0 54px;width:54px;height:54px;
-    border:1px solid rgba(233,166,200,.42);border-radius:17px;
-    background:linear-gradient(145deg,rgba(169,87,207,.34),rgba(194,87,162,.16));
-    color:var(--paper);font:600 1rem 'Oswald',sans-serif;letter-spacing:.04em;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 6px 14px rgba(0,0,0,.22);
-  }
-  .management-profile-meta{min-width:0;}
-  .management-card h3{
-    margin-bottom:4px;
-    color:var(--text);
-    font-size:1.12rem;
-    text-transform:uppercase;
-  }
-  .management-role{
-    color:var(--amber);font:500 .65rem 'JetBrains Mono',monospace;
-    letter-spacing:.1em;text-transform:uppercase;
-  }
-  .management-id{
-    display:block;overflow-wrap:anywhere;margin-bottom:16px;
-    color:var(--text-faint);font:400 .65rem 'JetBrains Mono',monospace;
-  }
-  .management-profile-link{
-    display:flex;align-items:center;justify-content:space-between;gap:10px;
-    padding:11px 13px;
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:10px;
-    background:rgba(15,9,23,.38);
-    color:var(--text);
-    text-decoration:none;
-    transition:background .2s ease,border-color .2s ease,transform .2s ease;
-  }
-  .management-profile-link:hover{
-    transform:translateY(-2px);
-    border-color:var(--glass-red-border);
-    background:var(--glass-red-fill);
-  }
-  .management-profile-link svg{width:15px;height:15px;color:var(--amber);flex:0 0 auto;}
-  .management-profile-link:focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
-
   .portal-grid{display:flex; flex-direction:column; align-items:center; gap:44px;}
   .info-band{
     display:grid;
@@ -1087,7 +1030,6 @@
 <div class="nav-container">
   <button class="tab-btn sheen active" onclick="switchTab('portal', this)">Giriş Kapısı</button>
   <button class="tab-btn sheen" onclick="switchTab('rules', this)">Sunucu Kuralları</button>
-  <button class="tab-btn sheen" onclick="switchTab('management', this)">YÖNETİM EKİBİ</button>
 </div>
 
 <div id="portal" class="content-section active">
@@ -1511,51 +1453,6 @@
 
   </div>
 
-</div>
-
-<div id="management" class="content-section">
-  <div class="section-head">
-    <h2>Yönetim Ekibi</h2>
-    <p>Nyrox V yönetim ekibinin Discord profilleri.</p>
-  </div>
-
-  <div class="management-grid">
-    <section class="management-card">
-      <div class="management-profile-head"><div class="management-avatar" aria-hidden="true">NV</div><div class="management-profile-meta"><h3>NYROX V</h3><span class="management-role">Yönetim Ekibi</span></div></div>
-      <span class="management-id">DISCORD ID · 1135249347160846396</span>
-      <a class="management-profile-link" href="https://discord.com/users/1135249347160846396" target="_blank" rel="noopener noreferrer">Discord Profilini Aç<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></a>
-    </section>
-    <section class="management-card">
-      <div class="management-profile-head"><div class="management-avatar" aria-hidden="true">NV</div><div class="management-profile-meta"><h3>NYROX V</h3><span class="management-role">Yönetim Ekibi</span></div></div>
-      <span class="management-id">DISCORD ID · 962261613740711986</span>
-      <a class="management-profile-link" href="https://discord.com/users/962261613740711986" target="_blank" rel="noopener noreferrer">Discord Profilini Aç<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></a>
-    </section>
-    <section class="management-card">
-      <div class="management-profile-head"><div class="management-avatar" aria-hidden="true">FO</div><div class="management-profile-meta"><h3>Founder</h3><span class="management-role">Yönetim Ekibi</span></div></div>
-      <span class="management-id">DISCORD ID · 578936467850526740</span>
-      <a class="management-profile-link" href="https://discord.com/users/578936467850526740" target="_blank" rel="noopener noreferrer">Discord Profilini Aç<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></a>
-    </section>
-    <section class="management-card">
-      <div class="management-profile-head"><div class="management-avatar" aria-hidden="true">FO</div><div class="management-profile-meta"><h3>Founder</h3><span class="management-role">Yönetim Ekibi</span></div></div>
-      <span class="management-id">DISCORD ID · 327905611943641099</span>
-      <a class="management-profile-link" href="https://discord.com/users/327905611943641099" target="_blank" rel="noopener noreferrer">Discord Profilini Aç<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></a>
-    </section>
-    <section class="management-card">
-      <div class="management-profile-head"><div class="management-avatar" aria-hidden="true">DE</div><div class="management-profile-meta"><h3>Developer</h3><span class="management-role">Yönetim Ekibi</span></div></div>
-      <span class="management-id">DISCORD ID · 1208143688526602302</span>
-      <a class="management-profile-link" href="https://discord.com/users/1208143688526602302" target="_blank" rel="noopener noreferrer">Discord Profilini Aç<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></a>
-    </section>
-    <section class="management-card">
-      <div class="management-profile-head"><div class="management-avatar" aria-hidden="true">DE</div><div class="management-profile-meta"><h3>Developer</h3><span class="management-role">Yönetim Ekibi</span></div></div>
-      <span class="management-id">DISCORD ID · 1239306741150384208</span>
-      <a class="management-profile-link" href="https://discord.com/users/1239306741150384208" target="_blank" rel="noopener noreferrer">Discord Profilini Aç<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></a>
-    </section>
-    <section class="management-card">
-      <div class="management-profile-head"><div class="management-avatar" aria-hidden="true">SD</div><div class="management-profile-meta"><h3>Site Developer</h3><span class="management-role">Yönetim Ekibi</span></div></div>
-      <span class="management-id">DISCORD ID · 1007199593546666014</span>
-      <a class="management-profile-link" href="https://discord.com/users/1007199593546666014" target="_blank" rel="noopener noreferrer">Discord Profilini Aç<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></a>
-    </section>
-  </div>
 </div>
 
 <footer>
